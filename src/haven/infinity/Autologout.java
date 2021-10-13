@@ -6,8 +6,6 @@ import java.util.*;
 import haven.*;
 import haven.MiniMap.DisplayIcon;
 
-import haven.infinity.AudioStorage;
-
 public class Autologout {
 	private MiniMap minimap;
 	private Set<Long> seen = new HashSet<>();
