@@ -817,7 +817,7 @@ public class OptWnd extends WindowX {
 	panel.add(new CFGBox("Enable path queueing", CFG.QUEUE_PATHS, "ALT+LClick will queue movement"), x, y);
 	
 	y += STEP;
-	panel.add(new CFGBox("Enable autologout on unknown players", CFG.AUTOLOGOUT, "ALT+LClick will queue movement"), x, y);
+	panel.add(new CFGBox("Enable autologout on unknown players", CFG.AUTOLOGOUT), x, y);
     
 	y += STEP;
 	Coord tsz = panel.add(new Label("Default speed:"), x, y).sz;
