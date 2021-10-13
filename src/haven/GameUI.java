@@ -47,6 +47,8 @@ import static haven.Inventory.*;
 import static haven.ItemFilter.*;
 import static haven.KeyBinder.*;
 
+import haven.infinity.PickForageable;
+
 public class GameUI extends ConsoleHost implements Console.Directory {
     public static final Text.Foundry msgfoundry = new Text.Foundry(Text.dfont, 14);
     private static final int blpw = UI.scale(142), brpw = UI.scale(142);
@@ -1648,6 +1650,10 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	} else if((key == 27) && (map != null) && !map.hasfocus) {
 	    setfocus(map);
 	    return(true);
+	} else if (!ev.isShiftDown() && ev.getKeyCode() == KeyEvent.VK_Q) {
+	    Thread t = new Thread(new PickForageable(this), "PickForageable");
+	    t.start();
+	    return true;
 	}
 	return(super.globtype(key, ev));
     }
