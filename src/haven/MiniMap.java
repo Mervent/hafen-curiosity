@@ -38,6 +38,7 @@ import haven.MapFile.Segment;
 import haven.MapFile.DataGrid;
 import haven.MapFile.GridInfo;
 import me.ender.minimap.*;
+import haven.infinity.Autologout;
 
 import static haven.MCache.cmaps;
 import static haven.MCache.tilesz;
@@ -65,10 +66,12 @@ public class MiniMap extends Widget {
     private Tex biometex;
     public boolean big = false;
     public int scale = 1;
+    public Autologout autologout;
 
     public MiniMap(Coord sz, MapFile file) {
 	super(sz);
 	this.file = file;
+	this.autologout = new Autologout(this);
     }
 
     public MiniMap(MapFile file) {
@@ -658,6 +661,7 @@ public class MiniMap extends Widget {
 	    if(disp.isPlayer()) {
 		g.chcolor(disp.kin() != null ? Color.WHITE : Color.RED);
 		g.aimage(RadarCFG.Symbols.$circle.tex, disp.sc, 0.5, 0.5);
+		autologout.check(disp);
 	    } else if (disp.isDead()) {
 	        img = disp.icon.imggray();
 	    }

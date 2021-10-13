@@ -1597,4 +1597,14 @@ public class Widget {
     public <T> void listen(String event, Action1<T> callback, Class<T> clazz) {
 	subscriptions.add(Reactor.listen(event, callback, clazz));
     }
+    
+    public GameUI gameui() {
+        Widget parent = this.parent;
+        while (parent != null) {
+            if (parent instanceof GameUI)
+                return (GameUI) parent;
+            parent = parent.parent;
+        }
+        return null;
+    }
 }
