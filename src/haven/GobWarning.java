@@ -1,5 +1,6 @@
 package haven;
 
+import haven.infinity.Autologout;
 import haven.render.RenderTree;
 
 import java.awt.*;
@@ -20,6 +21,9 @@ public class GobWarning extends GAttrib implements RenderTree.Node {
 	if(tgt != null) {
 	    if(WarnCFG.get(tgt, message)) {
 		gob.glob.sess.ui.message(String.format("%s spotted!", tgt.message), tgt.mcol, errsfx);
+	    }
+	    if (CFG.AUTOLOGOUT.get() && tgt == player) {
+		gob.glob.sess.ui.gui.act("lo");
 	    }
 	    radius = new ColoredRadius(gob, tgt.radius, tgt.scol, tgt.ecol);
 	} else {
