@@ -38,7 +38,6 @@ import haven.MapFile.Segment;
 import haven.MapFile.DataGrid;
 import haven.MapFile.GridInfo;
 import me.ender.minimap.*;
-import haven.infinity.Autologout;
 
 import static haven.MCache.cmaps;
 import static haven.MCache.tilesz;
@@ -66,7 +65,6 @@ public class MiniMap extends Widget {
     private Tex biometex;
     public boolean big = false;
     public int scale = 1;
-    public Autologout autologout;
 
     public MiniMap(Coord sz, MapFile file) {
 	super(sz);
