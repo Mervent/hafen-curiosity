@@ -1,6 +1,5 @@
 package haven;
 
-import haven.infinity.Autologout;
 import haven.render.RenderTree;
 
 import java.awt.*;
