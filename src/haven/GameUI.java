@@ -32,6 +32,7 @@ import haven.rx.Reactor;
 import integrations.mapv4.MappingClient;
 import me.ender.minimap.*;
 import me.ender.timer.Timer;
+import haven.mod.TimeWidget;
 
 import java.util.*;
 import java.util.function.*;
@@ -108,6 +109,7 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	    clearChanged();
 	}
     };
+    public TimeWidget timewidget;
 
     private static final OwnerContext.ClassResolver<BeltSlot> beltctxr = new OwnerContext.ClassResolver<BeltSlot>()
 	.add(Glob.class, slot -> slot.wdg().ui.sess.glob)
@@ -321,6 +323,7 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	opts.hide();
 	zerg = add(new Zergwnd(), Utils.getprefc("wndc-zerg", UI.scale(new Coord(187, 50))));
 	zerg.hide();
+	timewidget = add(new TimeWidget(this), Coord.z);
 	placemmap();
     }
 
@@ -1693,6 +1696,7 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	if(map != null)
 	    map.resize(sz);
 	beltwdg.c = new Coord(blpw + UI.scale(10), sz.y - beltwdg.sz.y - UI.scale(5));
+	timewidget.c = new Coord(sz.x / 2 - UI.scale(360 / 2), umpanel.sz.y);
 	super.resize(sz);
     }
     

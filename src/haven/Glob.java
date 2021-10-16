@@ -209,6 +209,9 @@ public class Glob {
 		Timer.server((long) (1000 * time));
 		if(!inc)
 		    lastrep = 0;
+		if (sess.ui.gui != null) {
+			sess.ui.gui.timewidget.servertimecalc();
+		}
 	    } else if(t == "astro") {
 		double dt = ((Number)a[n++]).doubleValue();
 		double mp = ((Number)a[n++]).doubleValue();
