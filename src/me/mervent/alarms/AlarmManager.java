@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 public class AlarmManager {
     
@@ -29,6 +30,11 @@ public class AlarmManager {
     // Play an alarm for gob with resname, if it has one
     public static boolean play(String resname, Gob gob) {
 	Alarm al = alarms.get(resname);
+
+	// prevents playing alarms for friendly players
+	if (Objects.equals(resname, "gfx/borka/body" ) && !gob.is(GobTag.FOE)) {
+	    return false;
+	}
 	if(al != null && (!al.knocked || !gob.anyOf(GobTag.DEAD, GobTag.KO))) {
 	    al.play();
 	    return true;

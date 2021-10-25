@@ -101,6 +101,14 @@
     <copy file="lib/hafen-res.jar" todir="build"/>
   </target>
 
+  <target name="alarms" depends="build-env">
+    <mkdir dir="build/alarms"/>
+    <copy todir="build/alarms">
+      <fileset dir="etc/alarms" includes="*"/>
+    </copy>
+    <copy todir="build" file="etc/alarms/alarms.ini"/>
+  </target>
+
   <target name="jar" depends="hafen-client,buildinfo,lib-classes">
     <jar destfile="build/hafen.jar" update="true">
       <fileset dir="build/classes" />
@@ -124,7 +132,7 @@
     <fail unless="lib-builtin-jar" message="builtin-res.jar not available" />
   </target>
   
-  <target name="jars" depends="build-env, jar, resources">
+  <target name="jars" depends="build-env, jar, resources, alarms">
     <copy todir="build">
       <fileset dir="lib">
 	<include name="jogl.jar" />
