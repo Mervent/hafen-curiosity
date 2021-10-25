@@ -603,6 +603,14 @@ public class OptWnd extends WindowX {
 	addPanelButton("Display", 'd', display, colum, row++);
 	addPanelButton("Combat", 'b', combat, colum, row++);
 	addPanelButton("Map upload", 'm', mapping, colum, row++);
+	addPanelButton("Alarm Manager", 'w', () -> {
+	    if(alarms == null) {
+		alarms = this.parent.add(new AlarmWindow());
+		alarms.show();
+	    } else {
+		alarms.show(!alarms.visible);
+	    }
+	}, colum, row++);
 
 	int y = 0;
 	mrow = Math.max(mrow, row);
@@ -612,14 +620,6 @@ public class OptWnd extends WindowX {
 	//y = main.add(new PButton(UI.scale(200), "Keybindings", 'k', keybind), 0, y).pos("bl").adds(0, 5).y;
 	y += UI.scale((mrow + 1) * PANEL_POS.y);
 	if(gopts) {
-	    y = main.add(new Button(UI.scale(200), "Alarm Manager", () -> {
-		if(alarms == null) {
-		    alarms = this.parent.add(new AlarmWindow());
-		    alarms.show();
-		} else {
-		    alarms.show(!alarms.visible);
-		}
-	    }),0 ,y).pos("bl").adds(0, 5).y;
 	    y = main.add(new Button(UI.scale(200), "Switch character", false).action(() -> {
 			getparent(GameUI.class).act("lo", "cs");
 	    }), 0, y).pos("bl").adds(0, 5).y;
@@ -713,6 +713,9 @@ public class OptWnd extends WindowX {
     
     private void addPanelButton(String name, char key, Action action, int x, int y) {
 	main.add(new AButton(UI.scale(200), name, key, action), UI.scale(PANEL_POS.mul(x, y)));
+    }
+    private void addPanelButton(String name, char key, Runnable runnable, int x, int y) {
+	main.add(new Button(UI.scale(200), name, false, runnable), UI.scale(PANEL_POS.mul(x, y)));
     }
 
     private void initCameraPanel() {
