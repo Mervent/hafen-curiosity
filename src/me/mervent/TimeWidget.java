@@ -1,4 +1,4 @@
-package haven.mod;
+package me.mervent;
 
 import haven.*;
 

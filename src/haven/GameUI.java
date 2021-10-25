@@ -32,7 +32,7 @@ import haven.rx.Reactor;
 import integrations.mapv4.MappingClient;
 import me.ender.minimap.*;
 import me.ender.timer.Timer;
-import haven.mod.TimeWidget;
+import me.mervent.TimeWidget;
 
 import java.util.*;
 import java.util.function.*;
@@ -43,10 +43,8 @@ import java.awt.image.WritableRaster;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import static haven.Action.*;
 import static haven.Inventory.*;
 import static haven.ItemFilter.*;
-import static haven.KeyBinder.*;
 
 public class GameUI extends ConsoleHost implements Console.Directory {
     public static final Text.Foundry msgfoundry = new Text.Foundry(Text.dfont, 14);
