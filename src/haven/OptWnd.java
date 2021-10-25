@@ -27,6 +27,8 @@
 package haven;
 
 
+import me.mervent.alarms.AlarmWindow;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.awt.event.KeyEvent;
@@ -42,6 +44,7 @@ public class OptWnd extends WindowX {
     private static final Text.Foundry LBL_FNT = new Text.Foundry(sans, 14);
     public Panel current;
     private WidgetList<KeyBinder.ShortcutWidget> shortcutList;
+    private AlarmWindow alarms;
     
     public void chpanel(Panel p) {
 	if(current != null)
@@ -609,6 +612,14 @@ public class OptWnd extends WindowX {
 	//y = main.add(new PButton(UI.scale(200), "Keybindings", 'k', keybind), 0, y).pos("bl").adds(0, 5).y;
 	y += UI.scale((mrow + 1) * PANEL_POS.y);
 	if(gopts) {
+	    y = main.add(new Button(UI.scale(200), "Alarm Manager", () -> {
+		if(alarms == null) {
+		    alarms = this.parent.add(new AlarmWindow());
+		    alarms.show();
+		} else {
+		    alarms.show(!alarms.visible);
+		}
+	    }),0 ,y).pos("bl").adds(0, 5).y;
 	    y = main.add(new Button(UI.scale(200), "Switch character", false).action(() -> {
 			getparent(GameUI.class).act("lo", "cs");
 	    }), 0, y).pos("bl").adds(0, 5).y;

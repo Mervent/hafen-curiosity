@@ -33,6 +33,7 @@ import haven.render.*;
 import haven.res.gfx.fx.msrad.MSRad;
 import integrations.mapv4.MappingClient;
 import me.ender.minimap.AutoMarkers;
+import me.mervent.alarms.AlarmManager;
 
 import static haven.OCache.*;
 
@@ -1175,6 +1176,13 @@ public class Gob implements RenderTree.Node, Sprite.Owner, Skeleton.ModOwner, Sk
     
 	if(status.updated(StatusType.tags)) {
 	    updateWarnings();
+	}
+	
+	if(status.updated(StatusType.tags)) {
+	    Resource res = getres();
+	    if (res != null) {
+		AlarmManager.play(res.name, this);
+	    }
 	}
 	
 	if(status.updated(StatusType.info, StatusType.tags)) {
