@@ -126,6 +126,12 @@ public class FoodInfo extends ItemInfo.Tip {
 	    }
 	    Color col = color(effective);
 	    imgs.add(RichText.render(String.format("Effective: $col[%d,%d,%d]{%s%%}", col.getRed(), col.getGreen(), col.getBlue(), Utils.odformat2(100 * effective, 2)), 0).img);
+	    imgs.add(RichText.render(
+		String.format(
+		    "EFEP Sum: $col[%d,%d,%d]{%s}, EFEP/Hunger: $col[%d,%d,%d]{%s}",
+		    col.getRed(), col.getGreen(), col.getBlue(), Utils.odformat2(fepSum * effective, 2),
+		    col.getRed(), col.getGreen(), col.getBlue(), Utils.odformat2(fepSum * effective / (100 * glut), 2)), 0).img
+	    );
 	}
 	imgs.add(RichText.render(String.format("FEP Sum: $col[128,255,0]{%s}, FEP/Hunger: $col[128,255,0]{%s}", Utils.odformat2(fepSum, 2), Utils.odformat2(fepSum / (100 * glut), 2)), 0).img);
 	return(catimgs(0, imgs.toArray(new BufferedImage[0])));
