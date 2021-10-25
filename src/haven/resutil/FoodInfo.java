@@ -103,8 +103,8 @@ public class FoodInfo extends ItemInfo.Tip {
 	    fepSum += evs[i].a;
 	}
 	for(int i = 0; i < evs.length; i++) {
-	    double probability = evs[i].a / fepSum;
-	    String fepItemString = String.format("%s (%s%%)", Utils.odformat2(evs[i].a, 2), Utils.odformat2(probability, 2));
+	    double probability = Math.round(evs[i].a / fepSum * 100);
+	    String fepItemString = String.format("%s - %s%%", Utils.odformat2(evs[i].a, 2), Utils.odformat2(probability, 2));
 	    Color col = Utils.blendcol(evs[i].ev.col, Color.WHITE, 0.5);
 	    imgs.add(catimgsh(5, evs[i].img, RichText.render(String.format("%s: $col[%d,%d,%d]{%s}", evs[i].ev.nm, col.getRed(), col.getGreen(), col.getBlue(), fepItemString), 0).img));
 	}
