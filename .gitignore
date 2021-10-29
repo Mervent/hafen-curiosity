@@ -9,6 +9,7 @@ out
 /.tmp
 /map
 /chats
+/cave
 /*.json
 /*.log
 /lib/ext
