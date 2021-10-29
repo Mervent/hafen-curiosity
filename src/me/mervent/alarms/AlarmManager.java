@@ -15,13 +15,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
 public class AlarmManager {
-    
     private static HashMap<String, Alarm> alarms = new HashMap<>();
+    private static HashSet<Long> played = new HashSet<Long>();
     
     public static void init() {
 	load();
@@ -35,8 +36,9 @@ public class AlarmManager {
 	if (Objects.equals(resname, "gfx/borka/body" ) && !gob.is(GobTag.FOE)) {
 	    return false;
 	}
-	if(al != null && (!al.knocked || !gob.anyOf(GobTag.DEAD, GobTag.KO))) {
+	if(al != null && !played.contains(gob.id) && (!al.knocked || !gob.anyOf(GobTag.DEAD, GobTag.KO))) {
 	    al.play();
+	    played.add(gob.id);
 	    return true;
 	} else {
 	    return false;
