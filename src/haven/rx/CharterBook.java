@@ -80,7 +80,7 @@ public class CharterBook extends WindowX {
 		    text.buf.key('\0', KeyEvent.VK_END, 0); //move caret to the end
 		    setfocus(text);
 		});
-	    add(new Button(50, "GO", false, text::activate), child.c.add(child.sz.x + 20, 0));
+	//     add(new Button(50, "GO", false, text()::activate), child.c.add(child.sz.x + 20, 0));
 	}
 	return super.add(child);
     }
