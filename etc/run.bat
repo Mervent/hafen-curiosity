@@ -1,0 +1,1 @@
+java -Djogl.disable.opengles=true -Xms2G -Xmx4G -XX:MaxGCPauseMillis=16 -Dsun.java2d.uiScale.enabled=false -Dhaven.defserv=game.havenandhearth.com -Dhaven.resurl=https://game.havenandhearth.com/res/ -Dhaven.cachebase=http://game.havenandhearth.com/render/ -Dhaven.fullscreen=off -Dhaven.screenurl=http://game.havenandhearth.com/mt/ss -jar hafen.jar

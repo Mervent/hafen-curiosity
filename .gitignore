@@ -5,3 +5,10 @@
 out
 /resources/compiled
 /resources/classes
+/bin
+/.tmp
+/map
+/chats
+/*.json
+/*.log
+/lib/ext
