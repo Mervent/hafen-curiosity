@@ -458,6 +458,10 @@ public class WItem extends Widget implements DTarget2 {
 	if(ui.modshift) {
 	    if(ui.modmeta) {
 		if(inv) {
+		    if(button == 2) {
+			wdgmsg("transfer-same-eq", item, false);
+			return true;
+		    }
 		    wdgmsg("transfer-same", item, button == 3);
 		    return true;
 		}
@@ -468,6 +472,10 @@ public class WItem extends Widget implements DTarget2 {
 	} else if(ui.modctrl) {
 	    if(ui.modmeta) {
 		if(inv) {
+		    if(button == 2) {
+		        wdgmsg("drop-same-eq", item, false);
+			return true;
+		    }
 		    wdgmsg("drop-same", item, button == 3);
 		    return true;
 		}

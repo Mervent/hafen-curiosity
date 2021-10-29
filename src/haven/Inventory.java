@@ -31,6 +31,7 @@ import rx.functions.Action0;
 import java.util.*;
 import java.awt.image.WritableRaster;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 public class Inventory extends Widget implements DTarget {
     public static final Coord sqsz = UI.scale(new Coord(33, 33));
@@ -183,6 +184,10 @@ public class Inventory extends Widget implements DTarget {
     public void wdgmsg(Widget sender, String msg, Object... args) {
 	if(msg.equals("transfer-same")) {
 	    process(getSame((GItem) args[0], (Boolean) args[1]), "transfer");
+	} else if (msg.equals("transfer-same-eq")) {
+	    process(getSameQuality((GItem) args[0], (Boolean) args[1]), "transfer");
+	} if (msg.equals("drop-same-eq")) {
+	    process(getSameQuality((GItem) args[0], (Boolean) args[1]), "drop");
 	} else if(msg.equals("drop-same")) {
 	    process(getSame((GItem) args[0], (Boolean) args[1]), "drop");
 	} else if(msg.equals("ttupdate") && sender instanceof GItem && wmap.containsKey(sender)) {
@@ -215,6 +220,11 @@ public class Inventory extends Widget implements DTarget {
 	}
 	items.sort(ascending ? ITEM_COMPARATOR_ASC : ITEM_COMPARATOR_DESC);
 	return items;
+    }
+    private List<WItem> getSameQuality(GItem item, Boolean ascending) {
+	double q = item.quality();
+	List<WItem> items = getSame(item, ascending);
+	return items.stream().filter(x -> x.item.quality() == q).collect(Collectors.toList());
     }
     
     private static boolean isSame(String name, GSprite spr, GItem item) {

@@ -190,6 +190,11 @@ public class GItem extends AWidget implements ItemInfo.SpriteOwner, GSprite.Owne
 	return new QualityList(ItemInfo.findall(QualityList.classname, info));
     }));
     
+    public double quality() {
+	QualityList ql = itemq.get();
+	return (ql != null && !ql.isEmpty()) ? ql.single().value : 0;
+    }
+    
     public final ItemInfo.AttrCache<Float> quantity = new ItemInfo.AttrCache<>(this::info, ItemInfo.AttrCache.cache(info -> {
 	float result = 1;
 	ItemInfo.Name name = ItemInfo.find(ItemInfo.Name.class, info);
