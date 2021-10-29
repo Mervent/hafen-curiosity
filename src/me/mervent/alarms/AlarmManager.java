@@ -48,7 +48,7 @@ public class AlarmManager {
     // Load settings from file or use defaults if file does not exist
     public static void load() {
 	alarms.clear();
-	File config = new File("alarmConfig");
+	File config = new File("alarms-user.cfg");
 	if(!config.exists()) {
 	    defaultSettings();
 	} else {
@@ -80,7 +80,7 @@ public class AlarmManager {
     // Save current settings to file
     public static void save() {
 	try {
-	    BufferedWriter bw = Files.newBufferedWriter(Paths.get(new File("alarmConfig").toURI()), StandardCharsets.UTF_8);
+	    BufferedWriter bw = Files.newBufferedWriter(Paths.get(new File("alarms-user.cfg").toURI()), StandardCharsets.UTF_8);
 	    for(Map.Entry<String, Alarm> e : alarms.entrySet()) {
 		bw.write(e.getKey() + ";" + e.getValue().filePath + ";" + e.getValue().volume+";"+e.getValue().knocked+"\n");
 	    }
@@ -104,7 +104,7 @@ public class AlarmManager {
     // Loads the default settings
     public static void defaultSettings() {
 	alarms.clear();
-	loadFromFile(new File("alarms.ini"));
+	loadFromFile(new File("alarms-default.cfg"));
     }
     
     public static class Alarm {

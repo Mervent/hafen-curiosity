@@ -135,7 +135,7 @@
 	<copy todir="build/alarms">
 	  <fileset dir="etc/alarms/alarms" includes="*.wav"/>
 	</copy>
-	<copy todir="build" file="etc/alarms/alarms.ini"/>
+	<copy todir="build" file="etc/alarms/alarms-default.cfg"/>
 </target>
 
   <target name="jar" depends="hafen-client, buildinfo, lib-classes">
