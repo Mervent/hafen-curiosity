@@ -44,7 +44,7 @@ public class Config {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static String authuser = getprop("haven.authuser", null);
     public static String authserv = getprop("haven.authserv", null);
-    public static String defserv = getprop("haven.defserv", "127.0.0.1");
+    public static String defserv = getprop("haven.defserv", "localhost");
     public static String[] servargs = null;
     public static URL resurl = geturl("haven.resurl", "http://game.havenandhearth.com/res/");
     public static URL screenurl = geturl("haven.screenurl", "http://game.havenandhearth.com/mt/ss");
@@ -55,16 +55,16 @@ public class Config {
     public static boolean profile = getprop("haven.profile", "off").equals("on");
     public static boolean profilegpu = getprop("haven.profilegpu", "off").equals("on");
     public static boolean par = true;
-    public static boolean fscache = getprop("haven.fscache", "on").equals("on");
+    public static boolean fscache = getbool("haven.fscache", true);
     public static Path resdir = getpath("haven.resdir", System.getenv("HAFEN_RESDIR"));
-    public static boolean nopreload = getprop("haven.nopreload", "no").equals("yes");
+    public static boolean nopreload = getbool("haven.nopreload", true);
     public static Path loadwaited = getpath("haven.loadwaited", null);
     public static Path allused = getpath("haven.allused", null);
     public static int mainport = getint("haven.mainport", 1870);
     public static int authport = getint("haven.authport", 1871);
-    public static boolean softres = getprop("haven.softres", "on").equals("on");
+    public static boolean softres = getbool("haven.softres", true);
     public static Double uiscale = getfloat("haven.uiscale", null);
-    public static byte[] authck = null, inittoken = null;
+    public static byte[] authck = getbytes("haven.authck", null), inittoken = getbytes("haven.inittoken", null);
     public static String prefspec = getprop("haven.prefspec", "hafen");
     public static final String confid = "ender";
     
@@ -183,6 +183,20 @@ public class Config {
 	if(val == null)
 	    return(def);
 	return(Integer.parseInt(val));
+    }
+
+    private static boolean getbool(String name, boolean def) {
+	String val = getprop(name, null);
+	if(val == null)
+	    return(def);
+	return(Utils.parsebool(val));
+    }
+
+    private static byte[] getbytes(String name, byte[] def) {
+	String val = getprop(name, null);
+	if(val == null)
+	    return(def);
+	return(Utils.hex2byte(val));
     }
 
     private static URL geturl(String name, String def) {

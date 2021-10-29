@@ -333,8 +333,8 @@ public class CharWnd extends WindowX {
 
 	    public Tex at() {
 		if(at == null) {
-		    Color c= color(a);
-		    at = elf.render(String.format("%d%%", (int)Math.ceil((1.0 - a) * 100)), c).tex();
+		    Color c= (a > 1.0)?buffed:Utils.blendcol(none, full, a);
+		    at = elf.render(String.format("%d%%", Math.max((int)Math.round((1.0 - a) * 100), 1)), c).tex();
 		}
 		return(at);
 	    }
