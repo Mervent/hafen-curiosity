@@ -80,11 +80,8 @@ public class BotAPI {
 		}
 	}
 	public Coord getItemLocation(WItem item) {
-		return item.c.div(33);
-	}	
-	public void drop(Inventory inventory, int x, int y) {
-		inventory.wdgmsg("drop", new Coord(x, y));
-	}
+		return item.c.div(33 * Utils.getprefd("uiscale", 1.0));
+	}		
 	public Coord getSize(Inventory inventory) {
 		return inventory.isz;
 	}
@@ -95,6 +92,9 @@ public class BotAPI {
 				sleep(25);
 			}
 		}
+	}
+	public void dropItem(Inventory inventory, int x, int y) {
+		inventory.wdgmsg("drop", new Coord(x, y));		
 	}
 	public Coord getSize(WItem item) {
 		try {
@@ -124,5 +124,5 @@ public class BotAPI {
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
-	}   
+	}
 }
