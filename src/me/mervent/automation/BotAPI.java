@@ -45,7 +45,7 @@ public class BotAPI {
 	}
 	public WItem getInventoryItemByLocation(Inventory inventory, int x, int y) {
 		for(WItem witem : inventory.children(WItem.class)) {
-			if(witem.c.div(UI.scale(33)).x == x && witem.c.div(UI.scale(33)).y == y) {
+			if(witem.c.div(UI.scale(33 * Utils.getprefd("uiscale", 1.0))).x == x && witem.c.div(UI.scale(33 * Utils.getprefd("uiscale", 1.0))).y == y) {
 				return witem;
 			}
 		}
@@ -78,6 +78,9 @@ public class BotAPI {
 			} catch(Loading l) {
 			}
 		}
+	}
+	public Double getItemQuality(WItem item) {
+		return item.item.quality();
 	}
 	public Coord getItemLocation(WItem item) {
 		return item.c.div(33 * Utils.getprefd("uiscale", 1.0));
