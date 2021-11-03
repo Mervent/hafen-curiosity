@@ -19,7 +19,7 @@ public class InventorySort {
                                 QualityList ql2 = o2.itemq.get();
                                 double q2 = (ql2 != null && !ql2.isEmpty()) ? ql2.single().value : 0;
 
-                                return Double.compare(q1, q2);
+                                return Double.compare(q2, q1);
                         }
                         return bot.getItemName(o1).compareTo(bot.getItemName(o2));
 
@@ -32,14 +32,6 @@ public class InventorySort {
         }
 
         public void run() {
-                this._run();
-
-                // new Thread(() -> {
-                // new InventorySort(gui)._run();
-                // }, "Sort").start();
-        }
-
-        public void _run() {
                 ArrayList<Inventory> inventories = new ArrayList<>();
 
                 for (Window w : gui.children(Window.class)) {
