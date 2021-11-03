@@ -1,7 +1,7 @@
 package haven;
 
 import auto.Bot;
-import me.mervent.automation.InventorySort;
+import me.mervent.automation.InventorySorter;
 
 public enum Action {
     TOGGLE_TIMERS(GameUI::toggleTimers, "Toggle Timers"),
@@ -46,9 +46,7 @@ public enum Action {
     FUEL_SMELTER_9(gui -> Bot.fuelGob(gui, "terobjs/smelter", "Coal", 9)),
     FUEL_SMELTER_12(gui -> Bot.fuelGob(gui, "terobjs/smelter", "Coal", 12)),
     FUEL_OVEN_4(gui -> Bot.fuelGob(gui, "terobjs/oven", "Branch", 4)),
-    
-    SORT_INVENTORY(gui -> new InventorySort(gui).run()),
-    
+
     CLEAR_PLAYER_DAMAGE(GobDamageInfo::clearPlayerDamage, "Clear damage from player"),
     CLEAR_ALL_DAMAGE(GobDamageInfo::clearAllDamage, "Clear damage from everyone");
     

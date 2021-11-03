@@ -3,6 +3,7 @@ package haven;
 import auto.Bot;
 import haven.resutil.Curiosity;
 import haven.rx.Reactor;
+import me.mervent.automation.InventorySorter;
 import rx.Subscription;
 
 import java.awt.*;
@@ -37,6 +38,7 @@ public class ExtInventory extends Widget {
     private double waitUpdate = 0;
     private boolean once = true;
     private WindowX wnd;
+    private final ICheckBox chb_sort = new ICheckBox("gfx/hud/btn-repeat", "", "-d", "-h");
     private final ICheckBox chb_show = new ICheckBox("gfx/hud/btn-extlist", "", "-d", "-h");
     private final ICheckBox chb_repeat = new ICheckBox("gfx/hud/btn-repeat", "", "-d", "-h");
     
@@ -131,11 +133,18 @@ public class ExtInventory extends Widget {
 		    .changed(this::setVisibility)
 		    .settip("LClick to toggle extra info\nRClick to hide inventory when info is visible\nTapping ALT toggles between displaying quality, name and info", true)
 		);
+		wnd.addtwdg(wnd.add(chb_sort)
+		    .changed(this::sortInventory)
+		    .settip("Sort", true)
+		);
 		grouping.sel = Grouping.valueOf(wnd.cfg.getValue(CFG_GROUP, Grouping.NONE.name()));
 		needUpdate = true;
 	    }
 	    hideExtension();
 	}
+    }
+    private void sortInventory(boolean state) {
+	    new InventorySorter(this.ui.gui, this.inv).sort();
     }
     
     private void setVisibility(boolean v) {
