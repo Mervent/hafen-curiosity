@@ -60,6 +60,7 @@ public class LoginScreen extends Widget {
 	optbtn.setgkey(GameUI.kb_opt);
 	adda(login = new Credbox(), bgc.adds(0, 10), 0.5, 0.0).hide();
 	accounts = add(new AccountList(10));
+	adda(new StatusLabel(hostname, 0.5), bgc.x, bg.sz().y, 0.5, 1);
 	CharterBook.init();
     }
     
@@ -109,7 +110,10 @@ public class LoginScreen extends Widget {
 
 	    private UserEntry(int w) {
 		super(w, "");
-		history.addAll(Utils.getprefsl("saved-tokens@" + hostname, new String[] {}));
+		//history.addAll(Utils.getprefsl("saved-tokens@" + hostname, new String[] {}));
+		synchronized (AccountList.accountmap) {
+		    history.addAll(AccountList.accountmap.keySet());
+		}
 	    }
 
 	    protected void changed() {

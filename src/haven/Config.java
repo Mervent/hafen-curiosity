@@ -31,17 +31,16 @@ import integrations.mapv4.MappingClient;
 
 import java.io.*;
 import java.net.URL;
-import java.io.PrintStream;
-import java.nio.file.Path;
-import static haven.Utils.getprop;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.Properties;
-
-import static haven.Utils.*;
 
 public class Config {
     public static final File HOMEDIR = new File("").getAbsoluteFile();
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static final Properties jarprops = getjarprops();
     public static String authuser = getprop("haven.authuser", null);
     public static String authserv = getprop("haven.authserv", null);
     public static String defserv = getprop("haven.defserv", "localhost");
@@ -50,10 +49,10 @@ public class Config {
     public static URL screenurl = geturl("haven.screenurl", "http://game.havenandhearth.com/mt/ss");
     public static URL cachebase = geturl("haven.cachebase", "http://game.havenandhearth.com/render/");
     public static URL mapbase = geturl("haven.mapbase", "http://game.havenandhearth.com/hres/");
-    public static boolean dbtext = getprop("haven.dbtext", "off").equals("on");
-    public static boolean bounddb = getprop("haven.bounddb", "off").equals("on");
-    public static boolean profile = getprop("haven.profile", "off").equals("on");
-    public static boolean profilegpu = getprop("haven.profilegpu", "off").equals("on");
+    public static boolean dbtext = getbool("haven.dbtext", false);
+    public static boolean bounddb = getbool("haven.bounddb", false);
+    public static boolean profile = getbool("haven.profile", false);
+    public static boolean profilegpu = getbool("haven.profilegpu", false);
     public static boolean par = true;
     public static boolean fscache = getbool("haven.fscache", true);
     public static Path resdir = getpath("haven.resdir", System.getenv("HAFEN_RESDIR"));
@@ -75,12 +74,6 @@ public class Config {
     public static boolean always_true = true; //always true to facilitate changes with minimal intrusions into loftar's code
     
     static {
-	String p;
-	if((p = getprop("haven.authck", null)) != null)
-	    authck = Utils.hex2byte(p);
-	if((p = getprop("haven.inittoken", null)) != null)
-	    inittoken = Utils.hex2byte(p);
-
 	loadBuildVersion();
 	isUpdate = !CFG.VERSION.get().equals(version) || !getFile("changelog.txt").exists();
 	if(isUpdate){
@@ -156,10 +149,10 @@ public class Config {
 	return null;
     }
 
-    public static void saveFile(String name, String data){
+    public static void saveFile(String name, String data) {
 	File file = Config.getFile(name);
 	boolean exists = file.exists();
-	if(!exists){
+	if(!exists) {
 	    try {
 		String parent = file.getParent();
 		//noinspection ResultOfMethodCallIgnored
@@ -178,6 +171,38 @@ public class Config {
 	}
     }
 
+    private static Properties getjarprops() {
+	Properties ret = new Properties();
+	try(InputStream fp = Config.class.getResourceAsStream("boot-props")) {
+	    if(fp != null)
+		ret.load(fp);
+	} catch(Exception exc) {
+	    /* XXX? Catch all exceptions? It just seems dumb to
+	     * potentially crash here for unforeseen reasons. */
+	    new Warning(exc, "unexpected error occurred when loading local properties").issue();
+	}
+	try {
+	    Path jar = Utils.srcpath(Config.class);
+	    if(jar != null) {
+		try(InputStream fp = Files.newInputStream(jar.resolveSibling("haven-config.properties"))) {
+		    ret.load(fp);
+		} catch(NoSuchFileException exc) {
+		    /* That's quite alright. */
+		}
+	    }
+	} catch(Exception exc) {
+	    new Warning(exc, "unexpected error occurred when loading neighboring properties").issue();
+	}
+	return(ret);
+    }
+
+    private static String getprop(String name, String def) {
+	String ret = jarprops.getProperty(name);
+	if(ret != null)
+	    return(ret);
+	return(Utils.getprop(name, def));
+    }
+    
     private static int getint(String name, int def) {
 	String val = getprop(name, null);
 	if(val == null)
