@@ -1391,7 +1391,7 @@ public class MapFile {
 	}
     }
 
-    public final BackCache<Long, Segment> segments = new BackCache<>(5, id -> {
+    public final BackCache<Long, Segment> segments = new BackCache<>(20, id -> {
 	    checklock();
 	    InputStream fp;
 	    try {
