@@ -751,18 +751,6 @@ public class OptWnd extends WindowX {
 	}, tx, y).sel = MapView.defcam();
     
 	y += BIG_STEP;
-	camera.add(new Label("Brighten view"), x, y);
-	y += UI.scale(15);
-	camera.add(new HSlider(UI.scale(200), 0, 500, 0) {
-	    public void changed() {
-		CFG.CAMERA_BRIGHT.set(val / 1000.0f);
-		if(ui.sess != null && ui.sess.glob != null) {
-		    ui.sess.glob.brighten();
-		}
-	    }
-	}, x, y).val = (int) (1000 * CFG.CAMERA_BRIGHT.get());
-    
-	y += BIG_STEP;
 	camera.add(new CFGBox("Invert horizontal camera rotation", CFG.CAMERA_INVERT_X), x, y);
     
 	y += STEP;

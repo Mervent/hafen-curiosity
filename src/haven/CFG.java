@@ -75,7 +75,6 @@ public class CFG<T> {
     public static final CFG<Boolean> HUNGER_METER = new CFG<>("ui.hunger_meter", false);
     public static final CFG<Boolean> SHOW_BOT_MESSAGES = new CFG<>("ui.hide_bot_messages", true);
 
-    public static final CFG<Float> CAMERA_BRIGHT = new CFG<>("camera.bright", 0f);
     public static final CFG<Boolean> CAMERA_INVERT_X = new CFG<>("camera.invert_x", false);
     public static final CFG<Boolean> CAMERA_INVERT_Y = new CFG<>("camera.invert_y", false);
     
@@ -87,6 +86,7 @@ public class CFG<T> {
     public static final CFG<String> AUTOMAP_ENDPOINT = new CFG<>("automap.andpoint", "");
     
     public static final CFG<Boolean> AUTOLOGOUT = new CFG<>("autologout", false);
+    public static final CFG<Boolean> NIGHTMODE = new CFG<>("nightmode", false);
 
     private static final String CONFIG_JSON = "config.json";
     private static final Map<Object, Object> cfg;
