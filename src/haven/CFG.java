@@ -87,6 +87,7 @@ public class CFG<T> {
     public static final CFG<String> AUTOMAP_ENDPOINT = new CFG<>("automap.andpoint", "");
     
     public static final CFG<Boolean> AUTOLOGOUT = new CFG<>("autologout", false);
+    public static final CFG<Boolean> NIGHTMODE = new CFG<>("nightmode", false);
 
     private static final String CONFIG_JSON = "config.json";
     private static final Map<Object, Object> cfg;

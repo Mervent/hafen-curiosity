@@ -101,6 +101,8 @@ public class KeyBinder {
 	add(KeyEvent.VK_DOWN, CTRL, CAM_SNAP_SOUTH);
 	add(KeyEvent.VK_HOME, NONE, CAM_RESET);
 	
+	add(KeyEvent.VK_N, CTRL, TOGGLE_NIGHTMODE);
+	
 	add(TOGGLE_HIDE_TREES);
 	add(TOGGLE_INSPECT);
 	add(TOGGLE_PEACE);
