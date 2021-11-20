@@ -1,0 +1,10 @@
+{
+  "editor.tabSize": 8,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.organizeImports": false
+  },
+  "editor.formatOnSave": false,
+  "editor.trimAutoWhitespace": false,
+  "files.trimTrailingWhitespace": false
+}
