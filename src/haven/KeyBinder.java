@@ -102,6 +102,7 @@ public class KeyBinder {
 	add(KeyEvent.VK_HOME, NONE, CAM_RESET);
 	
 	add(KeyEvent.VK_N, CTRL, TOGGLE_NIGHTMODE);
+	add(KeyEvent.VK_BACK_QUOTE, ALT, TOGGLE_AUTODRINK);
 	
 	add(TOGGLE_HIDE_TREES);
 	add(TOGGLE_INSPECT);

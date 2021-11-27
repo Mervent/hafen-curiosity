@@ -1,6 +1,7 @@
 package me.mervent;
 
 import auto.Bot;
+import haven.CFG;
 import haven.GameUI;
 import haven.IMeter;
 
@@ -14,6 +15,10 @@ public class Drinker {
 	}
 	
 	public void tick() {
+		if (!CFG.AUTODRINK.get()) {
+			return;
+		}
+		
 		try {
 			IMeter.Meter stam = gui.meterGetter.get("stam", 0);
 			
@@ -23,8 +28,7 @@ public class Drinker {
 					drink();
 				}
 			}
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 	}
 
 	private boolean isDrinking() {
