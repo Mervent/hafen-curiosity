@@ -60,12 +60,12 @@ public class FillBuffers {
 		    });
 	    }
 	    data = buf.duplicate();
-	    buf.position(buf.position() + sz);
+	    ((Buffer) buf).position(buf.position() + sz);
 	}
 
 	public ByteBuffer data() {
 	    if(pushed)
-		data.rewind();
+		((Buffer) data).rewind();
 	    return((data == null) ? ByteBuffer.allocate(sz) : data);
 	}
 
