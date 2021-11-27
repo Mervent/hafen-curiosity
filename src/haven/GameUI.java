@@ -32,6 +32,8 @@ import haven.rx.Reactor;
 import integrations.mapv4.MappingClient;
 import me.ender.minimap.*;
 import me.ender.timer.Timer;
+import me.mervent.Drinker;
+import me.mervent.MeterGetter;
 import me.mervent.TimeWidget;
 
 import java.util.*;
@@ -59,8 +61,9 @@ public class GameUI extends ConsoleHost implements Console.Directory {
     public GobIcon.Settings iconconf;
     public MiniMap mmap;
     public Fightview fv;
-    private List<Widget> meters = new LinkedList<Widget>();
-    private List<Widget> cmeters = new LinkedList<Widget>();
+    public List<Widget> meters = new LinkedList<Widget>();
+    public List<Widget> cmeters = new LinkedList<Widget>();
+    public MeterGetter meterGetter;
     private Text lastmsg;
     private double msgtime;
     public Window invwnd, equwnd, srchwnd, iconwnd;
@@ -108,6 +111,7 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	}
     };
     public TimeWidget timewidget;
+    public Drinker drinker;
 
     private static final OwnerContext.ClassResolver<BeltSlot> beltctxr = new OwnerContext.ClassResolver<BeltSlot>()
 	.add(Glob.class, slot -> slot.wdg().ui.sess.glob)
@@ -323,6 +327,8 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	zerg.hide();
 	timewidget = add(new TimeWidget(this), Coord.z);
 	placemmap();
+	meterGetter = new MeterGetter(this);
+	drinker = new Drinker(this);
     }
 
     protected void attached() {
@@ -1390,6 +1396,7 @@ public class GameUI extends ConsoleHost implements Console.Directory {
 	    afk = false;
 	}
 	mapfiletick();
+	drinker.tick();
     }
     
     public void uimsg(String msg, Object... args) {

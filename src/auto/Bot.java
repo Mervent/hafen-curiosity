@@ -132,7 +132,9 @@ public class Bot implements Defer.Callable<Void> {
 	Collection<Supplier<List<WItem>>> everywhere = Arrays.asList(HANDS(gui), INVENTORY(gui), BELT(gui));
 	Utils.chainOptionals(
 	    () -> findFirstThatContains("Tea", everywhere),
-	    () -> findFirstThatContains("Water", everywhere)
+	    () -> findFirstThatContains("Water", everywhere),
+	    () -> findFirstThatContains("Milk", everywhere),
+	    () -> findFirstThatContains("Beer", everywhere)
 	).ifPresent(Bot::drink);
     }
     
