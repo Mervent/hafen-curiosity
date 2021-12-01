@@ -87,6 +87,7 @@ public class CFG<T> {
     
     public static final CFG<Boolean> AUTOLOGOUT = new CFG<>("autologout", false);
     public static final CFG<Boolean> NIGHTMODE = new CFG<>("nightmode", false);
+    public static final CFG<Boolean> AUTODRINK = new CFG<>("autodrink", false);
 
     private static final String CONFIG_JSON = "config.json";
     private static final Map<Object, Object> cfg;

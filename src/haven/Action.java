@@ -1,6 +1,7 @@
 package haven;
 
 import auto.Bot;
+import haven.GameUI.MsgType;
 
 public enum Action {
     TOGGLE_TIMERS(GameUI::toggleTimers, "Toggle Timers"),
@@ -29,6 +30,7 @@ public enum Action {
     BOT_PICK_ALL_HERBS(Bot::pickup, "Auto-pick stuff", "Will automatically pickup all herbs/mussels/clay/frogs/grasshoppers etc. in radius that can be changed in Options->General."),
     TOGGLE_PEACE(GameUI::togglePeace, "Toggle Peace", "Toggle peace for current target"),
     TOGGLE_NIGHTMODE(CFG.NIGHTMODE, "Toggle Nightmode"),
+    TOGGLE_AUTODRINK(CFG.AUTODRINK, "Toggle Drinker"),
     
     //Camera controls
     CAM_ZOOM_IN(gui -> gui.map.zoomCamera(-1), "Camera zoom in"),
@@ -70,7 +72,14 @@ public enum Action {
     }
     
     Action(CFG<Boolean> toggle, String name, String description) {
-        this(gui -> toggle.set(!toggle.get(), true), name, description);
+        this(
+		gui -> {
+			toggle.set(!toggle.get(), true);
+			gui.ui.message(name, toggle.get() ? MsgType.GOOD : MsgType.BAD);
+		}, 
+		name, 
+		description
+	);
     }
     
     Action(CFG<Boolean> toggle, String name) {
@@ -78,7 +87,7 @@ public enum Action {
     }
     
     public void run(GameUI gui) {
-	action.run(gui);
+	action.run(gui);	
     }
     
     interface Do {
